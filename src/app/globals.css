@@ -1,0 +1,517 @@
+/* ============================================================
+   Product Feedback Analyzer — global styles
+   Plain CSS, mobile-first, responsive at 900px.
+   ============================================================ */
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --bg: #0b1220;
+  --bg-soft: #101a2e;
+  --panel: #131f36;
+  --panel-border: #223454;
+  --text: #e6edf7;
+  --text-dim: #93a4c0;
+  --accent: #4f8cff;
+  --accent-strong: #2f6fe0;
+  --ok: #34d399;
+  --warn: #fbbf24;
+  --bad: #f87171;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+}
+
+/* ── Reset-ish base ────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  background: radial-gradient(
+      1200px 600px at 80% -10%,
+      rgba(79, 140, 255, 0.14),
+      transparent 60%
+    ),
+    var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  min-height: 100vh;
+}
+
+/* ── Page frame ────────────────────────────────────────────── */
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.app-title {
+  font-size: 2rem;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+
+.app-title-accent {
+  color: var(--accent);
+}
+
+.app-subtitle {
+  color: var(--text-dim);
+  margin: 0 auto;
+  max-width: 640px;
+  font-size: 0.98rem;
+}
+
+/* ── Home layout: input left, results right ────────────────── */
+.home-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.panel-title {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* ── Review input ──────────────────────────────────────────── */
+.review-input {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.review-input-toolbar {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.review-count {
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.review-count-hint {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+.review-textarea {
+  width: 100%;
+  min-height: 300px;
+  resize: vertical;
+  background: var(--bg-soft);
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.review-textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.review-textarea:disabled {
+  opacity: 0.6;
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.button-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.button {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease,
+    border-color 0.15s ease;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+.button-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.button-primary:not(:disabled):hover {
+  background: var(--accent-strong);
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.button-secondary:not(:disabled):hover {
+  background: rgba(79, 140, 255, 0.12);
+}
+
+.button-ghost {
+  background: transparent;
+  color: var(--text-dim);
+  border-color: var(--panel-border);
+}
+
+.button-ghost:not(:disabled):hover {
+  color: var(--text);
+  border-color: var(--text-dim);
+}
+
+/* ── States (empty / loading / error) ──────────────────────── */
+.state-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.state-emoji {
+  font-size: 2.2rem;
+  margin-bottom: 6px;
+}
+
+.state-card h3 {
+  margin: 0 0 8px;
+}
+
+.state-card p {
+  color: var(--text-dim);
+  margin: 0 auto 16px;
+  max-width: 460px;
+}
+
+.state-hint-list {
+  list-style: none;
+  margin: 0 auto 12px;
+  padding: 0;
+  max-width: 340px;
+  text-align: left;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.state-hint-list li::before {
+  content: "✓ ";
+  color: var(--ok);
+}
+
+.state-footnote {
+  font-size: 0.8rem;
+}
+
+.state-error h3 {
+  color: var(--bad);
+}
+
+/* ── Loading spinner (pure CSS) ────────────────────────────── */
+.spinner {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  border: 4px solid var(--panel-border);
+  border-top-color: var(--accent);
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Results dashboard ─────────────────────────────────────── */
+.results-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dashboard-header h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.demo-badge {
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--warn);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.results-count {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.overall-chip {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid;
+}
+
+.overall-chip.positive {
+  color: var(--ok);
+  border-color: rgba(52, 211, 153, 0.4);
+  background: rgba(52, 211, 153, 0.12);
+}
+
+.overall-chip.neutral {
+  color: var(--warn);
+  border-color: rgba(251, 191, 36, 0.4);
+  background: rgba(251, 191, 36, 0.12);
+}
+
+.overall-chip.negative {
+  color: var(--bad);
+  border-color: rgba(248, 113, 113, 0.4);
+  background: rgba(248, 113, 113, 0.12);
+}
+
+.demo-notice {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: 10px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  padding: 10px 14px;
+  margin: 0;
+}
+
+.demo-notice strong {
+  color: var(--warn);
+}
+
+.demo-notice code {
+  background: var(--bg-soft);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.ai-notice {
+  background: rgba(79, 140, 255, 0.1);
+  border: 1px solid rgba(79, 140, 255, 0.35);
+  border-radius: 10px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  padding: 10px 14px;
+  margin: 0;
+}
+
+.ai-notice strong {
+  color: var(--accent);
+}
+
+/* ── Summary + sentiment grid ──────────────────────────────── */
+.summary-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.sentiment-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+}
+
+.sentiment-row {
+  display: grid;
+  grid-template-columns: 92px 1fr 48px;
+  gap: 10px;
+  align-items: center;
+  font-size: 0.88rem;
+}
+
+.sentiment-label {
+  color: var(--text-dim);
+}
+
+.sentiment-track {
+  height: 12px;
+  background: var(--bg-soft);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.sentiment-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}
+
+.sentiment-fill.positive {
+  background: var(--ok);
+}
+
+.sentiment-fill.neutral {
+  background: var(--warn);
+  opacity: 0.85;
+}
+
+.sentiment-fill.negative {
+  background: var(--bad);
+}
+
+.sentiment-percent {
+  text-align: right;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Insight cards grid ────────────────────────────────────── */
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.insight-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.insight-card h3 {
+  margin: 0 0 10px;
+  font-size: 0.98rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.insight-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.insight-card li {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  padding-left: 18px;
+  position: relative;
+}
+
+.insight-card li::before {
+  content: "•";
+  position: absolute;
+  left: 4px;
+  color: var(--accent);
+}
+
+/* ── Footer ────────────────────────────────────────────────── */
+.page-footer {
+  margin-top: 28px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+/* ── Utility ───────────────────────────────────────────────── */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Responsive: stack on narrow screens ───────────────────── */
+@media (max-width: 900px) {
+  .home-layout,
+  .summary-grid,
+  .insight-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .review-textarea {
+    min-height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 16px 12px 32px;
+  }
+
+  .app-title {
+    font-size: 1.5rem;
+  }
+
+  .button {
+    width: 100%;
+  }
+}

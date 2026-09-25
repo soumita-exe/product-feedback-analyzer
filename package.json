@@ -1,0 +1,21 @@
+{
+  "name": "product-feedback-analyzer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Paste customer reviews and get AI-powered product feedback insights: sentiment, themes, complaints, feature requests, and suggested improvements.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "next": "^16.3.6",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.6"
+  }
+}
